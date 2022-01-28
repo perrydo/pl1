@@ -3,68 +3,79 @@
 <!-- STUDENTS: Modify this file to provided the Google API key to get it working, 
                then modify the lat and lng and zoom to point to a place you know  -->
 <html>
-  <head>
-    <title>Story Map</title>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-        #map {
-          height: 100%;
-        }
+    <head>
+        <title>Story Map</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <style>
+        /* Always set the map height explicitly to define the size of the div
+        * element that contains the map. */
+            #map {
+            height: 100%;
+            }
 
-        /* Optional: Makes the sample page fill the window. */
-        html,
-        body {
-          height: 100%;
-          margin: 0;
-          padding: 0;
-        }
-    </style>
-    <script>
-      let map;
+            /* Optional: Makes the sample page fill the window. */
+            html,
+            body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            }
+        </style>
+        <script>
+        let map;
 
-    //   function initMap() {
-    //     map = new google.maps.Map(document.getElementById("map"), {
-    //       center: { lat: 21.019, lng: 105.805 }, 
-    //       zoom: 16,
-    //     });
-    //   }
+        //   function initMap() {
+        //     map = new google.maps.Map(document.getElementById("map"), {
+        //       center: { lat: 21.019, lng: 105.805 }, 
+        //       zoom: 16,
+        //     });
+        //   }
 
-      function initMap() {
-        var directionsService = new google.maps.DirectionsService();
-        var directionsRenderer = new google.maps.DirectionsRenderer();
-        var chicago = new google.maps.LatLng(41.850033, -87.6500523);
-        var mapOptions = {
-            zoom:7,
-            center: chicago
-        }
-        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-        directionsRenderer.setMap(map);
+        function initMap() {
+            var directionsService = new google.maps.DirectionsService();
+            var directionsRenderer = new google.maps.DirectionsRenderer();
+            var home = new google.maps.LatLng(21.019278569158224, 105.80525848990825);
+            var school = new google.maps.LatLng(21.03810115229329, 105.78425876893215);
+            var mapOptions = {
+                zoom: 15,
+                center: home
+            }
+            var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+            directionsRenderer.setMap(map);
         }
 
         function calcRoute() {
-        var start = document.getElementById('start').value;
-        var end = document.getElementById('end').value;
-        var request = {
-            origin: start,
-            destination: end,
-            travelMode: 'DRIVING'
-        };
-        directionsService.route(request, function(result, status) {
-            if (status == 'OK') {
-            directionsRenderer.setDirections(result);
-            }
-        });
-    }
-    </script>
-  </head>
-  <body>
-    <div id="map"></div>
-    
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <!-- *** STUDENTS: Replace YOUR_API_KEY text with provided key in class for property src in next line *** -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly" async>
-    </script>
-  </body>
+            var selectedMode = document.getElementById('mode').value;
+            var request = {
+                origin: home,
+                destination: school,
+                // Note that JavaScript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode[selectedMode]
+            };
+            directionsService.route(request, function(response, status) {
+                if (status == 'OK') {
+                directionsRenderer.setDirections(response);
+                }
+            });
+        }
+        </script>
+    </head>
+    <body>
+        <div id="floating-panel">
+            <b>Mode of Travel: </b>
+            <select id="mode">
+              <option value="DRIVING">Driving</option>
+              <option value="WALKING">Walking</option>
+              <option value="BICYCLING">Bicycling</option>
+              <option value="TRANSIT">Transit</option>
+            </select>
+        </div>
+        <div id="map"></div>    
+        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+        <!-- *** STUDENTS: Replace YOUR_API_KEY text with provided key in class for property src in next line *** -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCM-WWHYHIKY-do4kquMy9Z4wQaQx51AuE&callback=initMap&v=weekly" async>
+        </script>
+    </body>
 </html>
