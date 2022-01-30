@@ -21,7 +21,7 @@
                 padding: 0;
             }
 
-            /* Display the travel mode control once it is inside the map. */
+            /* Display the travel control once it is inside the map. */
 
             #floating-panel {
                 position: absolute;
@@ -157,22 +157,22 @@
             document.getElementById("show-poi").addEventListener("click", () => {
                 map.setOptions({ styles: styles["default"] });
             });
-
-            const styles = {
-                default: [],
-                hide: [
-                    {
-                        featureType: "poi.business",
-                        stylers: [{ visibility: "off" }],
-                    },
-                    {
-                        featureType: "transit",
-                        elementType: "labels.icon",
-                        stylers: [{ visibility: "off" }],
-                    },
-                ],
-            };
         }
+
+        const styles = {
+            default: [],
+            hide: [
+                {
+                    featureType: "poi.business",
+                    stylers: [{ visibility: "off" }],
+                },
+                {
+                    featureType: "transit",
+                    elementType: "labels.icon",
+                    stylers: [{ visibility: "off" }],
+                },
+            ],
+        };
 
         function calculateAndDisplayRoute(directionsService, directionsRenderer) {
             const selectedMode = document.getElementById("mode").value;
