@@ -192,6 +192,24 @@
               <option value="WALKING">Walking</option>
             </select>
         </div>
+
+        <div id="style-selector-control" class="map-control">
+            <input
+                type="radio"
+                name="show-hide"
+                id="hide-poi"
+                class="selector-control"
+            />
+            <label for="hide-poi">Hide</label>
+            <input
+                type="radio"
+                name="show-hide"
+                id="show-poi"
+                class="selector-control"
+                checked="checked"
+            />
+            <label for="show-poi">Show</label>
+        </div>
         <div id="map"></div>    
         <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
         <!-- *** STUDENTS: Replace YOUR_API_KEY text with provided key in class for property src in next line *** -->
