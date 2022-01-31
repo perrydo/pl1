@@ -49,8 +49,7 @@
                 font-family: "Roboto", "sans-serif";
                 margin: 10px;
                 padding-right: 5px;
-                /* Hide the control initially, to prevent it from appearing
-                        before the map loads. */
+                /* Hide the control initially, to prevent it from appearing before the map loads. */
                 display: none;
             }
 
@@ -166,7 +165,8 @@
             document.getElementById("mode").addEventListener("change", () => {
                 calculateAndDisplayRoute(directionsService, directionsRenderer);
             });
-
+            // Add controls to the map, allowing users to choose travel mode.
+            const styleControl = document.getElementById("floating-panel");
             // Add controls to the map, allowing users to hide/show features.
             const styleControl = document.getElementById("style-selector-control");
 
